@@ -5,6 +5,7 @@ from pymongo import MongoClient
 from fastapi.middleware.cors import CORSMiddleware
 from models.electionSchema import registerSchema, loginSchema, voteSchema
 
+
 app = FastAPI()
 load_dotenv()
 app.add_middleware(
