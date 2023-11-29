@@ -1,0 +1,397 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto Mono", monospace;
+  overflow-x: hidden;
+}
+
+@keyframes translate {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(8px);
+  }
+}
+
+.active {
+  color: red !important;
+  border-bottom: 3px solid blue;
+}
+
+.footer {
+  background: white;
+  font-family: "Roboto Mono", monospace;
+  height: 5rem;
+  width: 100vw;
+  border-top: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 0px 6px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 33.33%);
+  & div {
+    box-shadow: 1px 2px 5px black;
+    height: 50vh;
+  }
+
+  @media all and (max-width: 1157px) {
+    grid-template-columns: repeat(2, 50%);
+  }
+  @media all and (max-width: 833px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.partyVote {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+
+  .partyWise {
+    height: 10vh;
+    @media all and (max-width: 500px) {
+      font-size: 1.4rem;
+    }
+  }
+
+  & div {
+    margin: 1rem;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid black;
+    padding: 2rem;
+    & h1 {
+      height: 40%;
+      font-size: 1.3rem;
+    }
+    & img {
+      margin-bottom: 2rem;
+      height: 40%;
+    }
+    & h2 {
+      height: 40%;
+    }
+  }
+
+  @media all and (max-width: 537px) {
+    padding: 0rem;
+  }
+}
+
+.total {
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.welcome {
+  height: 89.3vh;
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  display: grid;
+  text-align: center;
+  grid-template-rows: 50% 50%;
+
+  .main {
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+  }
+
+  .down {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    padding-bottom: 1rem;
+
+    .one {
+      font-size: 1rem;
+    }
+
+    .two {
+      animation-name: translate;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+.head {
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  font-size: 2.5rem;
+  justify-content: center;
+  color: red;
+  align-items: center;
+  text-align: center;
+}
+
+.votes {
+  font-size: 10vh;
+  color: blue;
+}
+
+.partyImage {
+  max-width: 100%;
+}
+
+.voteImage {
+  display: flex;
+  max-height: min-content;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputBox {
+  font-size: large;
+  padding: 3%;
+  border-radius: 5px;
+}
+
+.NavContainer {
+  font-family: "Roboto Mono", monospace;
+  height: 5rem;
+  width: 100vw;
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 0px 6px black;
+
+  @media all and (max-width: 800px) {
+    height: 10rem;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    justify-content: center;
+  }
+}
+
+.MidCont {
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  & img {
+    width: 25rem;
+  }
+}
+
+.RightSide {
+  font-size: 1.2rem;
+  margin-right: 2rem;
+  display: flex;
+  gap: 1.5rem;
+
+  @media all and (max-width: 435px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 800px) {
+    .links {
+      display: none;
+    }
+  }
+  & div {
+    cursor: pointer;
+    height: 2rem;
+  }
+  & a {
+    height: 100%;
+    text-decoration: none;
+    color: blue;
+  }
+  .nav-toggle {
+    font-size: 1.5rem;
+    color: var(--clr-primary-5);
+    background: transparent;
+    border-color: transparent;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+  .nav-toggle:hover {
+    color: var(--clr-primary-1);
+    transform: rotate(90deg);
+  }
+
+  @media all and (min-width: 800px) {
+    .nav-toggle {
+      display: none;
+    }
+  }
+}
+
+/* Register and Login Page */
+.RegisterContainer {
+  height: 79vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.RegisterForm {
+  height: 80%;
+  width: 30%;
+  border-radius: 4px;
+  box-shadow: 1px 1px 5px black;
+  border: 2px solid black;
+  padding: 2rem;
+
+  @media all and (max-width: 1236px) {
+    width: 40%;
+  }
+
+  @media all and (max-width: 1000px) {
+    width: 50%;
+  }
+
+  @media all and (max-width: 900px) {
+    width: 60%;
+  }
+
+  @media all and (max-width: 800px) {
+    width: 70%;
+  }
+  @media all and (max-width: 700px) {
+    width: 80%;
+  }
+  @media all and (max-width: 400px) {
+    width: 90%;
+    padding: 0;
+  }
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    height: 100%;
+
+    .password,
+    .aadhar,
+    .name,
+    .mobile {
+      display: flex;
+      flex-direction: column;
+      padding: 0px 2rem;
+    }
+    .head {
+      height: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+    }
+  }
+
+  & button {
+    margin: 0px 2rem;
+    height: 3rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: large;
+  }
+
+  & input[type="number"] {
+    appearance: textfield;
+  }
+}
+
+
+/* Vote Page */
+.VoteContainer {
+  height: 79vh;
+  width: 100vw;
+}
+
+.VoteHead {
+  width: 100%;
+  height: 10%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 0 1rem;
+  @media all and (max-width: 813px) {
+    height: 20%;
+  }
+
+  @media all and (max-width: 477px) {
+    font-size: 0.9rem;
+  }
+  @media all and (max-width: 349px) {
+    height: 30%;
+    font-size: 0.9rem;
+  }
+}
+
+.VoteMain {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.VoteParties {
+  width: 100%;
+  & form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    width: 100%;
+
+    & button {
+      width: 9rem;
+      height: 3rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: large;
+    }
+  }
+
+  & table {
+    font-family: arial, sans-serif;
+    width: 70%;
+  }
+
+  & td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 0px 1rem;
+
+    & img {
+      width: 5.3rem;
+      height: 5rem;
+    }
+  }
+}
