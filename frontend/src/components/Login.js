@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import { message } from "antd";
+import digestMessage from "../Hash"
 
 const Login = () => {
   const history = useHistory();
@@ -14,14 +15,15 @@ const Login = () => {
 
     e.preventDefault();
 
-    const data = { aadharNo: aadhar, password: password };
+    const hashedPassword = await digestMessage(password);
+    const data = { aadharNo: aadhar, password: hashedPassword };
 
     if (aadhar === "" || password === "") {
       message.error("Fill in all the fields");
     } else {
       Axios.post(`${process.env.REACT_APP_API_URL}/login`, data)
         .then((res) => {
-          if (res.status === 200 && res.data) {
+          if (res.status === 200 && res.data.token) {
             localStorage.setItem("token", res.data.token);
             message.success("Login Successful!", 1.5, reload);
           } else {
