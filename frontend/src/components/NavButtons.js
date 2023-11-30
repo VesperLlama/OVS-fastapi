@@ -7,6 +7,7 @@ const NavButtons = (props) => {
   const logout = async (e) => {
     e.preventDefault();
     localStorage.removeItem("aadhar");
+    localStorage.removeItem("token");
     message.success("Logged out successfully!", 1.5, reload);
   };
 

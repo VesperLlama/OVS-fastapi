@@ -11,7 +11,8 @@ const Vote = () => {
     e.preventDefault();
     const aadhar = localStorage.getItem("aadhar");
     const party = vote;
-    const data = { aadharNo: aadhar, party: party };
+    const token = localStorage.getItem("token")
+    const data = { aadharNo: aadhar, party: party, token: token };
 
     if (vote === "") {
       message.error("Please Select an option");
@@ -29,7 +30,7 @@ const Vote = () => {
               reload
             );
           } else {
-            message.success("Voting failed. Please try again.");
+            message.error("Voting failed. Please try again.");
             Promise.reject();
           }
         })

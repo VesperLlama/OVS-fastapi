@@ -17,3 +17,4 @@ class loginSchema(BaseModel):
 class voteSchema(BaseModel):
     aadharNo: str
     party: str
+    token: str

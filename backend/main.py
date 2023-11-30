@@ -1,4 +1,5 @@
 import os
+import jwt
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from pymongo import MongoClient
@@ -22,6 +23,8 @@ db = client["electionDB"]
 collection = db["users"]
 pCollection = db["parties"]
 
+secret = os.getenv('key')
+
 
 @app.post("/register")
 def register(data: registerSchema):
@@ -41,19 +44,27 @@ def login(data: loginSchema):
     if not user:
         return {"message": "User does not exist."}
     else:
-        return user["name"]
+        token = jwt.encode({"aadharNo": data.aadharNo},
+                           secret, algorithm="HS256")
+        return {'token': token}
 
 
 @app.post("/recordVote")
 def recordVote(data: voteSchema):
     user = collection.find_one({"aadharNo": data.aadharNo})
-    if not user["voteStatus"]:
-        collection.find_one_and_update({"aadharNo": data.aadharNo}, {
-                                       "$set": {"voteStatus": True}})
-        pCollection.find_one_and_update(
-            {"name": data.party}, {"$inc": {"votes": 1}})
+    token = None
+    try:
+        token = jwt.decode(data.token, secret, algorithms="HS256")
+    except:
+        return {"error": "Authorisation Failed"}
     else:
-        return {"message": "Already voted"}
+        if not user["voteStatus"]:
+            collection.find_one_and_update({"aadharNo": data.aadharNo}, {
+                "$set": {"voteStatus": True}})
+            pCollection.find_one_and_update(
+                {"name": data.party}, {"$inc": {"votes": 1}})
+        else:
+            return {"message": "Already voted"}
 
 
 @app.get("/home")
