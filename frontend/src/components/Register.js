@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import { message } from "antd";
+import digestMessage from "../Hash";
 
 const Login = () => {
   const history = useHistory();
@@ -13,13 +14,13 @@ const Login = () => {
 
   const PostData = async (e) => {
     e.preventDefault();
+    let hashedPassword = await digestMessage(pass);
 
     const data = {
-      name: user[0],
-      password: user[1],
-      mobileNo: user[2],
-      aadharNo: user[3],
-      voteStatus: false,
+      name: name,
+      password: hashedPassword,
+      mobileNo: mobileNo,
+      aadharNo: aadharNo,
     };
 
     if (user[0] === "" || user[1] === "" || user[2] === "" || user[3] === "") {
@@ -35,8 +36,7 @@ const Login = () => {
             );
           } else if (res.status === 200 && res.data.message) {
             message.error(res.data.message);
-          }
-          else {
+          } else {
             message.error("Failed to create an account. Please try again");
             Promise.reject();
           }
