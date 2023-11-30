@@ -22,6 +22,7 @@ const Login = () => {
       Axios.post(`${process.env.REACT_APP_API_URL}/login`, data)
         .then((res) => {
           if (res.status === 200 && res.data) {
+            localStorage.setItem("token", res.data.token);
             message.success("Login Successful!", 1.5, reload);
           } else {
             message.error(

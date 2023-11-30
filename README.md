@@ -2,10 +2,10 @@
 A concept website created using ReactJS as the frontend, FastAPI as the backend and MongoDB as the database.
 
 ## Instructions to run -
-1. Install Python with fastapi, uvicorn, pymongo and dnspython modules by running the following command in the terminal.
+1. Install Python with FastAPI, uvicorn, PyMongo, dnspython and PyJWT modules by running the following command in the terminal.
 
 ```
-pip install fastapi uvicorn pymongo dnspython
+pip install fastapi uvicorn pymongo dnspython pyjwt
 ```
 
 2. Run the following command in a terminal when inside the backend folder to run the server.
