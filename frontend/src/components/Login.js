@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import { message } from "antd";
-import digestMessage from "../Hash"
+import digestMessage from "../Hash";
 
 const Login = () => {
   const history = useHistory();
@@ -33,7 +33,20 @@ const Login = () => {
             Promise.reject();
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 422) {
+            err.response.data.detail.forEach((element) => {
+              if (element.loc[1] === "aadharNo") {
+                message.error("Aadhar Number should have 12 numbers", 3);
+              } else if (element.loc[1] === "password") {
+                message.error("Password should have atleast 8 characters", 3);
+              } else {
+                message.error(element.msg, 3);
+              }
+            });
+          }
+        });
     }
   };
 

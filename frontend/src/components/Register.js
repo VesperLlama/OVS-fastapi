@@ -41,7 +41,22 @@ const Login = () => {
             Promise.reject();
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 422) {
+            err.response.data.detail.forEach((element) => {
+              if (element.loc[1] === "mobileNo") {
+                message.error("Mobile Number should have 10 numbers", 3);
+              } else if (element.loc[1] === "aadharNo") {
+                message.error("Aadhar Number should have 12 numbers", 3);
+              } else if (element.loc[1] === "password") {
+                message.error("Password should have atleast 8 characters", 3);
+              } else {
+                message.error(element.msg, 3);
+              }
+            });
+          }
+        });
     }
   };
 
