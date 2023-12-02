@@ -57,20 +57,21 @@ def login(data: loginSchema):
 
 @app.post("/recordVote")
 def recordVote(data: voteSchema):
-    user = collection.find_one({"aadharNo": data.aadharNo})
     token = None
     try:
         token = jwt.decode(data.token, secret, algorithms="HS256")
+        if (token["aadharNo"] != data.aadharNo):
+            raise Exception
     except:
         return {"error": "Authorisation Failed"}
     else:
-        if not user["voteStatus"]:
-            collection.find_one_and_update({"aadharNo": data.aadharNo}, {
-                "$set": {"voteStatus": True}})
+        user = collection.find_one_and_update({"aadharNo": data.aadharNo, "voteStatus": False}, {
+            "$set": {"voteStatus": True}})
+        if user is None:
+            return {"message": "Already voted"}
+        else:
             pCollection.find_one_and_update(
                 {"name": data.party}, {"$inc": {"votes": 1}})
-        else:
-            return {"message": "Already voted"}
 
 
 @app.get("/home")
