@@ -113,13 +113,13 @@
     font-size: 4rem;
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
   }
 
   .down {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     padding-bottom: 1rem;
 

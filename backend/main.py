@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from pymongo import MongoClient
 from fastapi.middleware.cors import CORSMiddleware
 from models.electionSchema import registerSchema, loginSchema, voteSchema
+from createCollections import create_users_collection, create_parties_collection
 
 
 app = FastAPI()
@@ -20,6 +21,11 @@ app.add_middleware(
 
 client = MongoClient(os.getenv('DB_URL'))
 db = client["electionDB"]
+
+if "users" not in db.list_collection_names() or "parties" not in db.list_collection_names():
+    create_users_collection(db)
+    create_parties_collection(db)
+
 collection = db["users"]
 pCollection = db["parties"]
 
